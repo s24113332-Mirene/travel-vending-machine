@@ -6,47 +6,94 @@
 <title>Premium Travel Vending Machine</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
+/* 🌍 WORLD MAP BACKGROUND (Design #5) */
 body {
-  background: linear-gradient(160deg, #ffe6f0, #ff99cc, #ff4da6);
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1200px-World_map_-_low_resolution.svg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  backdrop-filter: brightness(0.9) blur(1px);
 }
 
+/* 💼 SUITCASE DESIGN (Design #1) */
 .vending-container {
-  width: 650px;
-  background: linear-gradient(145deg, #ffd6ea, #ffb3d9, #ff80c9);
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 15px 50px rgba(255,105,180,0.4);
+  width: 680px;
+  background: linear-gradient(145deg, #ffb3d9, #ff99cc, #ff80c9);
+  padding: 35px;
+  border-radius: 35px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   text-align: center;
   color: #fff;
-  transform: scale(0.9);
+  position: relative;
+  border: 8px solid #d94c93;
 }
 
+/* suitcase handle */
+.vending-container::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 40px;
+  background: linear-gradient(90deg, #ff80c9, #d94c93);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* suitcase corner protectors */
+.vending-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 35px;
+  box-shadow:
+    10px 10px 0 #d94c93,
+    -10px 10px 0 #d94c93,
+    10px -10px 0 #d94c93,
+    -10px -10px 0 #d94c93;
+  pointer-events: none;
+}
+
+/* travel stickers (decorations) */
+.vending-container .sticker {
+  position: absolute;
+  font-size: 28px;
+  transform: rotate(-10deg);
+  opacity: 0.8;
+}
+.sticker1 { top: 60px; left: 40px; transform: rotate(-15deg); }
+.sticker2 { bottom: 80px; right: 50px; transform: rotate(12deg); }
+.sticker3 { bottom: 30px; left: 70px; transform: rotate(-8deg); }
+
 .header {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   background: linear-gradient(90deg, #ffb3d9, #ff80c9, #ffccf0);
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 0 20px #ffccf9;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 0 25px #ffccf9;
   font-family: 'Playfair Display', serif;
 }
 
+/* screen */
 .screen {
   background: #fff0f5;
-  border: 2px solid #ffb3d9;
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
+  border: 3px solid #ffb3d9;
+  border-radius: 15px;
+  padding: 18px;
+  margin-bottom: 18px;
   min-height: 160px;
   position: relative;
   color: #333;
-  box-shadow: 0 0 15px rgba(255,105,180,0.3);
-  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 0 20px rgba(255,105,180,0.3);
 }
 
 .screen p { font-size: 16px; font-weight: 600; margin: 6px 0; }
@@ -62,7 +109,6 @@ body {
   transform: translate(-50%, -50%);
   opacity: 0;
   text-align: center;
-  font-family: 'Orbitron', sans-serif;
   font-weight: bold;
   letter-spacing: 1px;
   font-size: 22px;
@@ -88,8 +134,10 @@ body {
 .product-section { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
 .product {
   background: linear-gradient(145deg,#ffd6ea,#ffb3d9,#ff80c9);
-  border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(255,105,180,0.3);
-  cursor: not-allowed; transition: 0.3s, box-shadow 0.3s, transform 0.3s; position: relative;
+  border-radius: 15px; padding: 20px; text-align: center;
+  box-shadow: 0 5px 15px rgba(255,105,180,0.3);
+  cursor: not-allowed; transition: 0.3s;
+  position: relative;
 }
 .product.enabled { cursor:pointer; }
 .product:hover.enabled { transform: scale(1.05); box-shadow:0 0 40px #ff99cc,0 0 60px #ff80c9,0 0 80px #ffb3d9;}
@@ -97,7 +145,7 @@ body {
 .product.selected { background:#ff80c980; border-color:#ff80c9; box-shadow:0 0 40px #ff80c9,0 0 70px #ffb3d9;}
 
 .product-icon { font-size: 50px; margin-bottom: 10px; }
-.product-name { font-family:'Baloo 2', cursive; font-size:18px; font-weight:bold; margin-bottom:3px; }
+.product-name { font-size:18px; font-weight:bold; margin-bottom:3px; }
 .product-price { font-size:14px; margin-bottom:5px; }
 
 .quantity-section { margin-top: 15px; font-weight: bold; color: #fff; text-shadow:0 0 10px #ff99cc; }
@@ -125,9 +173,13 @@ body {
 <body>
 
 <div class="vending-container">
+  <div class="sticker sticker1">🗺️</div>
+  <div class="sticker sticker2">🎒</div>
+  <div class="sticker sticker3">📸</div>
+
   <div class="header">
     <h1>Premium Travel Vending Machine</h1>
-    <p>Luxury Essentials • Multi-Select • Smart Pay</p>
+    <p>Adventure Essentials • Explore & Go!</p>
   </div>
 
   <div class="screen">
@@ -204,116 +256,22 @@ body {
 </div>
 
 <script>
+/* your JavaScript remains exactly the same */
 let balance=0, insertedCoins=[], selectedItems=[], globalQuantity=1;
 const quotes = ["✈️ Adventure awaits!","🌍 Explore the world, one step at a time.","👜 Travel light, live fully.","🏖️ Collect moments, not things.","🚀 Your journey begins now!"];
 
-function insert(amount){
-  balance+=amount;
-  insertedCoins.push(`NT$${amount}`);
-  updateDisplay();
-  setMessage(`🪙 Inserted NT$${amount}. Balance: NT$${balance}`);
-  highlightAffordableProducts();
-  enableProducts();
-  playSound("coin");
-}
-
+function insert(amount){ balance+=amount; insertedCoins.push(`NT$${amount}`); updateDisplay(); setMessage(`🪙 Inserted NT$${amount}. Balance: NT$${balance}`); highlightAffordableProducts(); enableProducts(); playSound("coin"); }
 function enableProducts(){ document.querySelectorAll('.product').forEach(p=>p.classList.add('enabled')); }
-
-function toggleSelect(element, name, price){
-  if(!element.classList.contains('enabled')) return;
-  let quantity = parseInt(globalQuantity);
-  if(isNaN(quantity) || quantity<1) quantity=1;
-  let currentTotal = selectedItems.reduce((sum,i)=>sum + i.price*i.quantity,0);
-  if(!element.classList.contains('selected') && currentTotal+price*quantity>balance){
-    setMessage("⚠️ Not enough balance for this item!"); playSound("error"); return;
-  }
-  if(element.classList.contains('selected')){
-    element.classList.remove('selected');
-    selectedItems = selectedItems.filter(i=>i.name!==name);
-  } else {
-    element.classList.add('selected');
-    selectedItems.push({name,price,quantity});
-  }
-  setMessage(`${selectedItems.length} item(s) selected.`);
-  updateTotal();
-}
-
-function updateGlobalQuantity(){
-  let qty=parseInt(document.getElementById("global-quantity").value);
-  if(isNaN(qty)||qty<1) qty=1;
-  globalQuantity=qty;
-  selectedItems.forEach(i=>i.quantity=globalQuantity);
-  updateTotal();
-}
-
-function updateTotal(){
-  let total = selectedItems.reduce((sum,i)=>sum + i.price*(isNaN(i.quantity)||i.quantity<1?1:i.quantity),0);
-  document.getElementById("total").textContent=`Total Selected: ${total} NTD`;
-}
-
-function confirmPurchase(){
-  if(selectedItems.length===0){ setMessage("⚠️ Select at least one product!"); playSound("error"); return; }
-  let total = selectedItems.reduce((sum,i)=>sum + i.price*(isNaN(i.quantity)||i.quantity<1?1:i.quantity),0);
-  if(balance>=total){
-    balance-=total;
-    let randomQuote = quotes[Math.floor(Math.random()*quotes.length)];
-    setMessage(`🎉 Purchased ${selectedItems.length} items for NT$${total}!\n${randomQuote}`);
-    animateItems(); playSound("buy");
-    setTimeout(()=>{ document.getElementById("resetBtn").style.display="block"; },1000);
-    updateDisplay(); updateTotal();
-  } else {
-    setMessage(`⚠️ Not enough balance! Need NT$${total-balance} more.`); playSound("error");
-  }
-}
-
-function resetMachine(){
-  balance=0; insertedCoins=[]; selectedItems=[]; updateDisplay();
-  setMessage("🪙 Please insert coins to begin!");
-  document.getElementById("resetBtn").style.display="none";
-  document.querySelectorAll(".product").forEach(p=>p.classList.remove("selected","affordable","enabled"));
-  updateTotal();
-}
-
-function updateDisplay(){
-  document.getElementById("balance").textContent=balance;
-  document.getElementById("inserted-coins").textContent=insertedCoins.length>0?"Inserted coins: "+insertedCoins.join(","):"Inserted coins: 0";
-}
-
+function toggleSelect(element,name,price){ if(!element.classList.contains('enabled'))return; let quantity=parseInt(globalQuantity); if(isNaN(quantity)||quantity<1)quantity=1; let currentTotal=selectedItems.reduce((sum,i)=>sum+i.price*i.quantity,0); if(!element.classList.contains('selected')&&currentTotal+price*quantity>balance){setMessage("⚠️ Not enough balance for this item!");playSound("error");return;} if(element.classList.contains('selected')){element.classList.remove('selected');selectedItems=selectedItems.filter(i=>i.name!==name);}else{element.classList.add('selected');selectedItems.push({name,price,quantity});} setMessage(`${selectedItems.length} item(s) selected.`); updateTotal();}
+function updateGlobalQuantity(){ let qty=parseInt(document.getElementById("global-quantity").value); if(isNaN(qty)||qty<1)qty=1; globalQuantity=qty; selectedItems.forEach(i=>i.quantity=globalQuantity); updateTotal();}
+function updateTotal(){ let total=selectedItems.reduce((sum,i)=>sum+i.price*(isNaN(i.quantity)||i.quantity<1?1:i.quantity),0); document.getElementById("total").textContent=`Total Selected: ${total} NTD`; }
+function confirmPurchase(){ if(selectedItems.length===0){setMessage("⚠️ Select at least one product!");playSound("error");return;} let total=selectedItems.reduce((sum,i)=>sum+i.price*(isNaN(i.quantity)||i.quantity<1?1:i.quantity),0); if(balance>=total){ balance-=total; let randomQuote=quotes[Math.floor(Math.random()*quotes.length)]; setMessage(`🎉 Purchased ${selectedItems.length} items for NT$${total}!\n${randomQuote}`); animateItems(); playSound("buy"); setTimeout(()=>{document.getElementById("resetBtn").style.display="block";},1000); updateDisplay(); updateTotal(); } else { setMessage(`⚠️ Not enough balance! Need NT$${total-balance} more.`); playSound("error"); } }
+function resetMachine(){ balance=0; insertedCoins=[]; selectedItems=[]; updateDisplay(); setMessage("🪙 Please insert coins to begin!"); document.getElementById("resetBtn").style.display="none"; document.querySelectorAll(".product").forEach(p=>p.classList.remove("selected","affordable","enabled")); updateTotal();}
+function updateDisplay(){ document.getElementById("balance").textContent=balance; document.getElementById("inserted-coins").textContent=insertedCoins.length>0?"Inserted coins: "+insertedCoins.join(","):"Inserted coins: 0"; }
 function setMessage(msg){ document.getElementById("message").textContent=msg; }
-
-function highlightAffordableProducts(){
-  document.querySelectorAll(".product").forEach(p=>{
-    const price=parseInt(p.getAttribute("data-price"));
-    if(balance>=price){ p.classList.add("affordable"); p.classList.add("enabled"); }
-    else p.classList.remove("affordable");
-  });
-}
-
-function animateItems(){
-  const container=document.querySelector(".vending-container");
-  selectedItems.forEach((item,i)=>{
-    const icon=document.createElement("div");
-    icon.className="item-float";
-    icon.textContent = item.name.includes("Headphones")?"🎧":
-                       item.name.includes("Power Bank")?"🔋":
-                       item.name.includes("Eye Mask")?"😴":
-                       item.name.includes("Pillow")?"💤":
-                       item.name.includes("Adapter")?"🔌":
-                       item.name.includes("Wallet")?"👝":
-                       item.name.includes("First Aid")?"🩹":"🧴";
-    icon.style.left=`${50+i*70}px`;
-    container.appendChild(icon);
-    setTimeout(()=>icon.remove(),1200);
-  });
-}
-
-function playSound(type){
-  const audio=new Audio();
-  if(type==="coin") audio.src="https://cdn.pixabay.com/audio/2022/03/15/audio_7dcf0e0f9f.mp3";
-  if(type==="buy") audio.src="https://cdn.pixabay.com/audio/2022/03/15/audio_c68c7c4eb6.mp3";
-  if(type==="error") audio.src="https://cdn.pixabay.com/audio/2022/03/15/audio_4b1e87257a.mp3";
-  audio.volume=0.3; audio.play();
-}
+function highlightAffordableProducts(){ document.querySelectorAll(".product").forEach(p=>{ const price=parseInt(p.getAttribute("data-price")); if(balance>=price){p.classList.add("affordable");p.classList.add("enabled");} else p.classList.remove("affordable"); }); }
+function animateItems(){ const container=document.querySelector(".vending-container"); selectedItems.forEach((item,i)=>{ const icon=document.createElement("div"); icon.className="item-float"; icon.textContent=item.name.includes("Headphones")?"🎧":item.name.includes("Power Bank")?"🔋":item.name.includes("Eye Mask")?"😴":item.name.includes("Pillow")?"💤":item.name.includes("Adapter")?"🔌":item.name.includes("Wallet")?"👝":item.name.includes("First Aid")?"🩹":"🧴"; icon.style.left=`${50+i*70}px`; container.appendChild(icon); setTimeout(()=>icon.remove(),1200); }); }
+function playSound(type){ const audio=new Audio(); if(type==="coin")audio.src="https://cdn.pixabay.com/audio/2022/03/15/audio_7dcf0e0f9f.mp3"; if(type==="buy")audio.src="https://cdn.pixabay.com/audio/2022/03/15/audio_c68c7c4eb6.mp3"; if(type==="error")audio.src="https://cdn.pixabay.com/audio/2022/03/15/audio_4b1e87257a.mp3"; audio.volume=0.3; audio.play(); }
 </script>
 
 </body>
